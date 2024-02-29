@@ -13,6 +13,12 @@ annotate service.table2 with @(
             Value : name,
             ![@UI.Hidden],
         },
+        {
+            $Type : 'UI.DataFieldForIntentBasedNavigation',
+            SemanticObject : 'object',
+            Action : 'display',
+            Label : 'Display obj1',
+        },
     ]
 );
 annotate service.table2 with @(

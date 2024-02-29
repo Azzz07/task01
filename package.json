@@ -10,12 +10,14 @@
         "@sap-cloud-sdk/resilience": "^3.11.0",
         "@sap/cds": "^7",
         "@sap/cds-hana": "^2",
-        "express": "^4"
+        "@sap/xssec": "^3.6.1",
+        "express": "^4",
+        "passport": "^0.7.0"
     },
     "devDependencies": {
         "@cap-js/sqlite": "^1",
         "@sap/cds-dk": "^7",
-        "@sap/ux-specification": "UI5-1.120",
+        "@sap/ux-specification": "^1.120.3",
         "rimraf": "^3.0.2"
     },
     "scripts": {
@@ -24,11 +26,24 @@
         "undeploy": "cf undeploy task01 --delete-services --delete-service-keys --delete-service-brokers",
         "build": "rimraf resources mta_archives && mbt build --mtar archive",
         "deploy": "cf deploy mta_archives/archive.mtar --retries 1",
-        "watch-application2": "cds watch --open application2/webapp/index.html?sap-ui-xx-viewCache=false"
+        "watch-application2": "cds watch --open application2/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-project1": "cds watch --open project1/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-aapp1": "cds watch --open aapp1/webapp/index.html?sap-ui-xx-viewCache=false",
+        "watch-app3": "cds watch --open app3/webapp/index.html?sap-ui-xx-viewCache=false"
     },
     "sapux": [
         "app/application1",
-        "app/application2"
+        "app/application2",
+        "app/project1",
+        "app/aapp1",
+        "app/app3",
+        "app/project1",
+        "app/project1"
     ],
-    "cds": {}
+    "cds": {
+        "requires": {
+            "db": "hana",
+            "auth": "dummy"
+        }
+    }
 }

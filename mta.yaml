@@ -8,6 +8,7 @@ modules:
   path: gen/srv
   requires:
   - name: task01-db
+  - name: task01-destination-service
   provides:
   - name: srv-api
     properties:
@@ -34,6 +35,18 @@ modules:
       - application2.zip
       name: application2
       target-path: resources/
+    - artifacts:
+      - project1.zip
+      name: project1
+      target-path: resources/
+    - artifacts:
+      - aapp1.zip
+      name: aapp1
+      target-path: resources/
+    - artifacts:
+      - app3.zip
+      name: app3
+      target-path: resources/
 - name: application1
   type: html5
   path: app/application1
@@ -56,13 +69,43 @@ modules:
     supported-platforms: []
 - name: task01-db-deployer
   type: hdb
-  path: db
+  path: gen/db
   requires:
   - name: task01-db
     properties:
       TARGET_CONTAINER: ~{hdi-container-name}
   parameters:
     buildpack: nodejs_buildpack
+- name: project1
+  type: html5
+  path: app/project1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: aapp1
+  type: html5
+  path: app/aapp1
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: app3
+  type: html5
+  path: app/app3
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: task01-repo-host
   type: org.cloudfoundry.managed-service
